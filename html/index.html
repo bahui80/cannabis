@@ -4,6 +4,23 @@
 		<script src="../js/topojson.js"></script>
 		<script src="../js/d3.min.js"></script> 
 		<script src="../js/datamaps.all.js"></script>
+		<script src="../js/jquery-2.1.4.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				navigator.geolocation.getCurrentPosition(showPosition);
+				function showPosition(position){ 
+				    // location.latitude = position.coords.latitude;
+				    // location.longitude = position.coords.longitude;
+				    alert("Latitude: " + position.coords.latitude); 
+				    alert(" Longitude: " + position.coords.longitude);
+				} //showPosition
+				// $.ajax({
+				// 	url: "http://eiffel.itba.edu.ar/hci/service2/Misc.groovy?method=GetAirlines",
+    //     			dataType: "jsonp",
+    //     			jsonpCallback: "fillAirlinesArray",
+    // 			});
+			});
+		</script>
 	</head>
 	<body style="height: 100%;">
 		<div id="cannabisMap" style="position: relative; height: 100%"></div>
