@@ -12,12 +12,61 @@
 				    console.log("Latitude: " + position.coords.latitude); 
 				    console.log(" Longitude: " + position.coords.longitude);
 				} //showPosition
+				// var xmlHttp = new XMLHttpRequest();
+   	// 			 xmlHttp.open( "GET", "https://www.smokereports.com/api/v1.0/strains", false ); // false for synchronous request
+    // 			xmlHttp.send( null );
+    // 			alert(xmlHttp.responseText);
 				// $.ajax({
-				// 	url: "https://www.smokereports.com/api/v1.0/ACA VA LA LLAMADA",
-    //     			dataType: "jsonp",
-    //     			jsonpCallback: "",
-    // 			});
-			});
+					 // type:"GET",
+			         // beforeSend: function (request)
+			            // {
+			                // request.setRequestHeader('X-API-Key', '419e9be6fa1328b0830d85bfc9a0a845815b5b9f');
+			            // },
+			            // url: "https://www.smokereports.com/api/v1.0/strains",
+			          //  data: "json=" + escape(JSON.stringify(createRequestObject)),
+			           // processData: false,
+			            // success: function(msg) {
+			                // alert(msg);
+			            // }
+				// });
+				$.ajax({
+					type: 'GET',
+					url: "https://www.smokereports.com/api/v1.0/strains",
+					datatype: 'jsonp',
+					beforeSend: function (request) {
+						request.setRequestHeader("X-API-Key", "419e9be6fa1328b0830d85bfc9a0a845815b5b9f");
+                		request.setRequestHeader("Access-Control-Allow-Origin", "*");
+                		request.setRequestHeader("Access-Control-Allow-Methods", "GET");
+                		
+            		},
+					success: function (resp) {
+				        alert(resp);
+				    },
+				     error: function(e) {
+       					alert('Error: ' + e);
+    				}  
+
+				});
+
+				// $.getJSON("https://www.smokereports.com/api/v1.0/strains/VUJCJ4TYMG000000000000000", function() { 
+    				// console.log(data);
+				});
+				// for (i = 0; i < 700; i++) { 
+					// setTimeout(function(){
+ 						// $.ajax({
+					 	// 	// url: "https://www.smokereports.com/api/v1.0/strains" + "?page=" + i,
+					 	// 	url: "https://www.smokereports.com/api/v1.0/strains",
+	      //    				type: "GET",
+	      //    				success: function (resp) {
+	   			// 			     log(resp);
+	    		// 			},
+	     	// 			});
+					// }, 10000);
+			// } 
+			
+		
+
+
 		</script>
 	</head>
 	<body style="height: 100%;">
