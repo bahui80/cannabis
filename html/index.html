@@ -5,444 +5,471 @@
 		<script src="../js/d3.min.js"></script> 
 		<script src="../js/datamaps.all.js"></script>
 		<script src="../js/jquery-2.1.4.min.js"></script>
+		<script src="../js/jquery-2.1.4.min.js"></script>
+		<script>
+			function parseResponse(data) { 
+				console.log(data.data);				
+			};
+		</script>
+		<script>
+			// function getJSONP(url, success) {
+			//     var ud = '_' + +new Date,
+   //      		script = document.createElement('script'),
+   //      		head = document.getElementsByTagName('head')[0] || document.documentElement;
+
+ 		// 	   window[ud] = function(data) {
+   //      			head.removeChild(script);
+   //      			success && success(data);
+   //  			}
+   //  			script.src = url;
+   //  			// script.src = url.replace('callback=?', 'callback=' + ud);
+   //  			head.appendChild(script);
+			// };
+			// for(i = 1; i < 700; i++) {
+			// 	var urlToCall = 'https://www.smokereports.com/api/v1.0/strains?page=' + i + '&callback=parseResponse';
+			// 	getJSONP(urlToCall, function(data) {
+	  //   			console.log(data);
+			// 	});
+			// }
+
+				// <script type='application/javascript' src="https://www.smokereports.com/api/v1.0/strains?page=" + i + "?callback=parseResponse"/>
+			
+		</script>
+
+		
 		<script>
 			$(document).ready(function() {
 				navigator.geolocation.getCurrentPosition(showPosition);
 				function showPosition(position){
 				    console.log("Latitude: " + position.coords.latitude); 
 				    console.log(" Longitude: " + position.coords.longitude);
-				} //showPosition
-				// var xmlHttp = new XMLHttpRequest();
-   	// 			 xmlHttp.open( "GET", "https://www.smokereports.com/api/v1.0/strains", false ); // false for synchronous request
-    // 			xmlHttp.send( null );
-    // 			alert(xmlHttp.responseText);
-				// $.ajax({
-					 // type:"GET",
-			         // beforeSend: function (request)
-			            // {
-			                // request.setRequestHeader('X-API-Key', '419e9be6fa1328b0830d85bfc9a0a845815b5b9f');
-			            // },
-			            // url: "https://www.smokereports.com/api/v1.0/strains",
-			          //  data: "json=" + escape(JSON.stringify(createRequestObject)),
-			           // processData: false,
-			            // success: function(msg) {
-			                // alert(msg);
-			            // }
-				// });
-				$.ajax({
-					type: 'GET',
-					url: "https://www.smokereports.com/api/v1.0/strains",
-					datatype: 'jsonp',
-					beforeSend: function (request) {
-						request.setRequestHeader("X-API-Key", "419e9be6fa1328b0830d85bfc9a0a845815b5b9f");
-                		request.setRequestHeader("Access-Control-Allow-Origin", "*");
-                		request.setRequestHeader("Access-Control-Allow-Methods", "GET");
-                		
-            		},
-					success: function (resp) {
-				        alert(resp);
-				    },
-				     error: function(e) {
-       					alert('Error: ' + e);
-    				}  
-
-				});
-
-				// $.getJSON("https://www.smokereports.com/api/v1.0/strains/VUJCJ4TYMG000000000000000", function() { 
-    				// console.log(data);
-				});
-				// for (i = 0; i < 700; i++) { 
-					// setTimeout(function(){
- 						// $.ajax({
-					 	// 	// url: "https://www.smokereports.com/api/v1.0/strains" + "?page=" + i,
-					 	// 	url: "https://www.smokereports.com/api/v1.0/strains",
-	      //    				type: "GET",
-	      //    				success: function (resp) {
-	   			// 			     log(resp);
-	    		// 			},
-	     	// 			});
-					// }, 10000);
-			// } 
-			
-		
-
-
+				};
+			});
 		</script>
 	</head>
-	<body style="height: 100%;">
-		<div id="cannabisMap" style="position: relative; height: 100%"></div>
+	<body style="height: 100%; margin-bottom: 0px; margin-top:0px">
+		<div id="cannabisMap" style="position: relative; height: 640px; width: 1000px"></div>
 		<script>
+		 	var series = [
+		 					// Afganistán
+			 				["AFG",4.3,"Sin información","Sin información","Sin información","Sin información"],
+			 				// Albania
+			 				["ALB",1.8,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Argelia
+			 				["DZA",5.7,"Ilegal","Ilegal","Ilegal","Ilegal"],
+							// Angola
+			 				["AGO",2.1,"Sin información","Sin información","Sin información","Sin información"],
+			 				// Argentina
+			 				["ARG",7.2,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				// Armenia
+			 				["ARM",3.5,"Sin información","Sin información","Sin información","Sin información"],
+			 				// Australia
+			 				["AUS",10.6,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
+			 				// Austria
+			 				["AUT",3.5,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+
+			 				["AZE",3.5],["BHS",5.5],["BGD",3.3],["BLR",1.1],
+			 				["BEL",5.1,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
+			 				["BLZ",8.5,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				["BOL",4.3,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				// Botsuana
+			 				["BWA",0.0,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				["BIH",2.8],["BRA",2.6],["BRN",0.02],
+			 				["BGR",2.5],["BFA",2.9],["KHM",3.5],["KHM",3.5],["CAN",12.6],["TCD",0.9],
+			 				["CHL",11.3],["COL",2.3],["CRI",1.0],["HRV",5.2],["CYP",4.4],["CZE",15.2],
+			 				["DNK",5.5],["DOM",0.3],["ECU",0.7],["EGY",6.2],["SLV",0.4],["GBR",6.6],
+			 				["EST",6.0],["ETH",2.6],["FJI",5.1],["FIN",3.1],["FRA",8.6],["GEO",2.7],
+			 				["DEU",4.8],["GHA",21.5],["GRC",1.7],["GRL",7.6],["GTM",4.8],["GUY",2.6],
+			 				["HTI",1.4],["HND",0.8],["HUN",2.3],["ISL",3.4],["IND",3.2],["IDN",0.4],
+			 				["IRN",4.2],["IRL",6.3],["ISR",8.9],["ITA",14.6],["JAM",9.9],["JPN",0.1],
+			 				["JOR",2.1],["KAZ",4.2],["KEN",2.1],["KWT",3.1],["KGZ",6.4],["LAO",0.9],
+			 				["LVA",4.9],["LBN",1.9],["LBY",0.05],["LTU",5.6],["LUX",7.6],["MKD",0.6],
+			 				["MDG",9.1],["MYS",1.6],["MLI",7.8],["MEX",1.2],["MDA",0.9],["MNE",0.2],
+			 				["MAR",4.2],["MMR",0.9],["NAM",3.9],["NPL",3.2],["NLD",5.4],["NCL",1.9],
+			 				["NZL",14.6],["NIC",1.1],["NGA",14.3],["NOR",4.6],["OMN",0.1],["PAK",3.9],
+			 				["PAN",3.6],["PNG",29.5],["PRY",1.6],["PER",0.7],["PHL",0.8],["POL",2.7],
+			 				["PRT",3.3],["PRI",4.9],["QAT",0.1],["KOR",0.3],["ROU",0.4],["RUS",3.5],
+			 				["SAU",0.3],["SEN",2.8],["SRB",4.1],["SLE",16.1],["SVK",6.9],["SVN",4.1],
+			 				["SOM",2.5],["ZAF",4.3],["ESP",10.6],["LKA",1.5],["SUR",4.3],["SWE",1.2],
+			 				["CHE",3.4],["SYR",2.0],["TWN",0.3],["TJK",3.4],["TZA",0.2],["THA",1.2],
+			 				["TGO",1.0],["TTO",4.7],["TUR",1.9],["UGA",1.4],["UKR",2.5],["ARE",5.4],
+			 		 		["URY",6.0],["USA",13.7],["UZB",4.2],["VUT",0.1],["VEN",0.9],["VNM",0.3],
+			 				["ZMB",9.5],["ZWE",6.9]
+			 			];
+
+			var dataset = {};
+			var onlyValues = series.map(function(obj){ return obj[1]; });
+    		var minValue = Math.min.apply(null, onlyValues), maxValue = Math.max.apply(null, onlyValues);
+
+    		var paletteScale = d3.scale.linear().domain([minValue,maxValue]).range(["#EFEFFF","#02386F"]); 
+
+    		series.forEach(function(item) { 
+				var iso = item[0],
+				value = item[1];
+				possesion = item[2];
+				sale = item[3];
+				transport = item[4];
+				cultivation = item[5];
+				dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value), possesion, sale, transport, cultivation};
+			});
+
 			var cannabisMap = new Datamap({
 				element: document.getElementById("cannabisMap"),
 			  	projection: 'mercator',
 			  	fills: {
 			    	'authorHasTraveledTo': '#fa0fa0',
-			    	defaultFill: '#ABDDA4'
+			    	defaultFill: 'gray'
 			  	},
 			  	geographyConfig: {
-			  		highlightBorderColor: '#bada55',
+			  		highlightBorderColor: '#000000',
 			   		popupTemplate: function(geography, data) {
-			      		return '<div class="hoverinfo">' + '<p style="margin-bottom: 0px; margin-top: 0px; text-align: center"><strong>'  + geography.properties.name + '</strong></p>' + '<p style="margin-bottom: 0px; margin-top: 0px; text-align: center">Legal:' +  data.legal + ' </p>'
+			      		return '<div class="hoverinfo">' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold;margin-bottom: 0px; margin-top: 0px; text-align: center">'  + geography.properties.name + '</p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Posesión:' +  data.possesion + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Venta:' +  data.sale + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Transporte:' +  data.transport + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Cultivación:' +  data.cultivation + ' </p>'
 			    	},
-			    	highlightBorderWidth: 3
+			    	highlightFillColor: function(geo) {
+		            	return geo['fillColor'];
+		            },
+			    	highlightBorderWidth: 2
 			  	},
-			  	data: {
-			  		// Afganistán
-			  		"AFG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Angola
-			  		"AGO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Albania
-			  		"ALB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Emiratos Árabes Unidos
-			  		"ARE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Argentina
-			  		"ARG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Armenia
-			  		"ARM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Antártida
-			  		"ATA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Tierras Australes y Antárticas Francesas
-			  		"ATF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Australia
-			  		"AUS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-					// Austria
-			  		"AUT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Azerbaiyán
-			  		"AZE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Burundi
-			  		"BDI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Bélgica
-			  		"BEL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Benín
-			  		"BEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Burkina Faso
-			  		"BFA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Bangladesh
-			  		"BGD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Bulgaria
-			  		"BGR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Bahamas
-			  		"BHS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Bosnia y Herzegovina
-			  		"BIH": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Bielorrusia
-			  		"BLR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Belice
-			  		"BLZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Bolivia
-			  		"BOL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Brasil
-			  		"BRA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Brunéi
-			  		"BRN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Bután
-			  		"BTN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Botsuana
-			  		"BWA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// República Centroafricana
-			  		"CAF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Canadá
-			  		"CAN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Suiza
-			  		"CHE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Chile
-			  		"CHL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// China
-			  		"CHN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Costa de Marfil
-			  		"CIV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Camerún
-			  		"CMR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// República Democrática del Congo
-			  		"COD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// República del Congo
-			  		"COG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Colombia
-			  		"COL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Costa Rica
-			  		"CRI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Cuba
-			  		"CUB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-					// República Turca del Norte de Chipre
-			  		"CNP": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Chipre
-			  		"CYP": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// República Checa
-			  		"CZE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Alemania
-			  		"DEU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Yibuti
-			  		"DJI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Dinamarca
-			  		"DNK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// República Dominicana
-			  		"DOM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Argelia
-			  		"DZA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Ecuador
-			  		"ECU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Egipto
-			  		"EGY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Eritrea
-			  		"ERI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// España
-			  		"ESP": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Estonia
-			  		"EST": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Etiopía
-			  		"ETH": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Finlandia
-			  		"FIN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Fiji
-			  		"FJI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Francia
-			  		"FRA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Guyana Francesa
-			  		"GUF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Gabón
-			  		"GAB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Gran Bretaña
-			  		"GBR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Georgia
-			  		"GEO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Ghana
-			  		"GHA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Guinea
-			  		"GIN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Gambia
-			  		"GMB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Guinea-Bisáu
-			  		"GNB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Guinea Ecuatorial
-			  		"GNQ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Grecia
-			  		"GRC": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Groenlandia
-			  		"GRL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Guatemala
-			  		"GTM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Guyana
-			  		"GUY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Honduras
-			  		"HND": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Croacia
-			  		"HRV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Haití
-			  		"HTI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Hungría
-			  		"HUN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Indonesia
-			  		"IDN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// India
-			  		"IND": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Irlanda
-			  		"IRL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Irán
-			  		"IRN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Irak
-			  		"IRQ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Islandia
-			  		"ISL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Israel
-			  		"ISR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Italia
-			  		"ITA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Jamaica
-			  		"JAM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Jordania
-			  		"JOR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Japón
-			  		"JPN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Kazajistán
-			  		"KAZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Kenia
-			  		"KEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Kirguistán
-			  		"KGZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Camboya
-			  		"KHM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Corea del Sur
-			  		"KOR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Kosovo
-			  		"KSV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Kuwait
-			  		"KWT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Laos
-			  		"LAO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Líbano
-			  		"LBN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Liberia
-			  		"LBR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Libia
-			  		"LBY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Sri Lanka
-			  		"LKA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Lesoto
-			  		"LSO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Lituania
-			  		"LTU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Luxemburgo
-			  		"LUX": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Letonia
-			  		"LVA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Marruecos
-			  		"MAR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Moldavia
-			  		"MDA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Madagascar
-			  		"MDG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// México
-			  		"MEX": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Macedonia
-			  		"MKD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Malí
-			  		"MLI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Birmania
-			  		"MMR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Montenegro
-			  		"MNE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Mongolia
-			  		"MNG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Mozambique
-			  		"MOZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Mauritania
-			  		"MRT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Malaui
-			  		"MWI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Malasia
-			  		"MYS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Namibia
-			  		"NAM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Nueva Caledonia
-			  		"NCL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Níger
-			  		"NER": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Nigeria
-			  		"NGA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Nicaragua
-			  		"NIC": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Holanda
-			  		"NLD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Noruega
-			  		"NOR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Nepal
-			  		"NPL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Nueva Zelanda
-			  		"NZL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Omán
-			  		"OMN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Pakistán
-			  		"PAK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Panamá
-			  		"PAN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Perú
-			  		"PER": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Filipinas
-			  		"PHL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Papúa Nueva Guinea
-			  		"PNG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Polonia
-			  		"POL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Puerto Rico
-			  		"PRI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Corea del Norte
-			  		"PRK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Portugal
-			  		"PRT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Paraguay
-			  		"PRY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Qatar
-			  		"QAT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Rumania
-			  		"ROU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Rusia
-			  		"RUS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Ruanda
-			  		"RWA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Sahara
-			  		"ESH": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Arabia Saudita
-			  		"SAU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Sudán
-			  		"SDN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Sudán del Sur
-			  		"SSD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Senegal
-			  		"SEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Islas Salomón
-			  		"SLB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Sierra Leona
-			  		"SLE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// El Salvador
-			  		"SLV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Somalilandia
-			  		"SML": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Somalia
-			  		"SOM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Serbia
-			  		"SRB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Surinam
-			  		"SUR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Eslovaquia
-			  		"SVK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Eslovenia
-			  		"SVN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Suecia
-			  		"SWE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Suazilandia
-			  		"SWZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Siria
-			  		"SYR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Chad
-			  		"TCD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Togo
-			  		"TGO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Tailandia
-			  		"THA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Tayikistán
-			  		"TJK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Turkmenistán
-			  		"TKM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Timor Oriental
-			  		"TLS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},	
-			  		// Trinidad y Tobago
-			  		"TTO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},	
-			  		// Túnez
-			  		"TUN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},	
-			  		// Turquía
-			  		"TUR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Taiwán
-			  		"TWN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Tanzania
-			  		"TZA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Uganda
-			  		"UGA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Ucrania
-			  		"UKR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Uruguay
-			  		"URY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Estados Unidos
-			  		"USA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Uzbekistán
-			  		"UZB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Venezuela
-			  		"VEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Vietnam
-			  		"VNM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Vanuatu
-			  		"VUT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Cisjordania
-			  		"PSE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Yemen
-			  		"YEM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Sudáfrica
-			  		"ZAF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Zambia
-			  		"ZMB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Zimbabue
-			  		"ZWE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  		// Falkland islands ver que hacemos FLK
-			   	}
+			  	data: dataset,
+			  // 	data: {
+			  // 		// Emiratos Árabes Unidos
+			  // 		"ARE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Antártida
+			  // 		"ATA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Tierras Australes y Antárticas Francesas
+			  // 		"ATF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Azerbaiyán
+			  // 		"AZE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Burundi
+			  // 		"BDI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Bélgica
+			  // 		"BEL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Benín
+			  // 		"BEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Burkina Faso
+			  // 		"BFA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Bangladesh
+			  // 		"BGD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Bulgaria
+			  // 		"BGR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Bahamas
+			  // 		"BHS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Bosnia y Herzegovina
+			  // 		"BIH": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Bielorrusia
+			  // 		"BLR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Belice
+			  // 		"BLZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Bolivia
+			  // 		"BOL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Brasil
+			  // 		"BRA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Brunéi
+			  // 		"BRN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Bután
+			  // 		"BTN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// República Centroafricana
+			  // 		"CAF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Canadá
+			  // 		"CAN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Suiza
+			  // 		"CHE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Chile
+			  // 		"CHL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// China
+			  // 		"CHN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Costa de Marfil
+			  // 		"CIV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Camerún
+			  // 		"CMR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// República Democrática del Congo
+			  // 		"COD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// República del Congo
+			  // 		"COG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Colombia
+			  // 		"COL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Costa Rica
+			  // 		"CRI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Cuba
+			  // 		"CUB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  //        // República Turca del Norte de Chipre
+			  // 		"CNP": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Chipre
+			  // 		"CYP": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// República Checa
+			  // 		"CZE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Alemania
+			  // 		"DEU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Yibuti
+			  // 		"DJI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Dinamarca
+			  // 		"DNK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// República Dominicana
+			  // 		"DOM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Ecuador
+			  // 		"ECU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Egipto
+			  // 		"EGY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Eritrea
+			  // 		"ERI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// España
+			  // 		"ESP": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Estonia
+			  // 		"EST": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Etiopía
+			  // 		"ETH": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Finlandia
+			  // 		"FIN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Fiji
+			  // 		"FJI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Francia
+			  // 		"FRA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Guyana Francesa
+			  // 		"GUF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Gabón
+			  // 		"GAB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Gran Bretaña
+			  // 		"GBR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Georgia
+			  // 		"GEO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Ghana
+			  // 		"GHA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Guinea
+			  // 		"GIN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Gambia
+			  // 		"GMB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Guinea-Bisáu
+			  // 		"GNB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Guinea Ecuatorial
+			  // 		"GNQ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Grecia
+			  // 		"GRC": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Groenlandia
+			  // 		"GRL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Guatemala
+			  // 		"GTM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Guyana
+			  // 		"GUY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Honduras
+			  // 		"HND": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Croacia
+			  // 		"HRV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Haití
+			  // 		"HTI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Hungría
+			  // 		"HUN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Indonesia
+			  // 		"IDN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// India
+			  // 		"IND": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Irlanda
+			  // 		"IRL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Irán
+			  // 		"IRN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Irak
+			  // 		"IRQ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Islandia
+			  // 		"ISL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Israel
+			  // 		"ISR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Italia
+			  // 		"ITA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Jamaica
+			  // 		"JAM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Jordania
+			  // 		"JOR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Japón
+			  // 		"JPN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Kazajistán
+			  // 		"KAZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Kenia
+			  // 		"KEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Kirguistán
+			  // 		"KGZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Camboya
+			  // 		"KHM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Corea del Sur
+			  // 		"KOR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Kosovo
+			  // 		"KSV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Kuwait
+			  // 		"KWT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Laos
+			  // 		"LAO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Líbano
+			  // 		"LBN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Liberia
+			  // 		"LBR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Libia
+			  // 		"LBY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Sri Lanka
+			  // 		"LKA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Lesoto
+			  // 		"LSO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Lituania
+			  // 		"LTU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Luxemburgo
+			  // 		"LUX": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Letonia
+			  // 		"LVA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Marruecos
+			  // 		"MAR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Moldavia
+			  // 		"MDA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Madagascar
+			  // 		"MDG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// México
+			  // 		"MEX": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Macedonia
+			  // 		"MKD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Malí
+			  // 		"MLI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Birmania
+			  // 		"MMR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Montenegro
+			  // 		"MNE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Mongolia
+			  // 		"MNG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Mozambique
+			  // 		"MOZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Mauritania
+			  // 		"MRT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Malaui
+			  // 		"MWI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Malasia
+			  // 		"MYS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Namibia
+			  // 		"NAM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Nueva Caledonia
+			  // 		"NCL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Níger
+			  // 		"NER": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Nigeria
+			  // 		"NGA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Nicaragua
+			  // 		"NIC": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Holanda
+			  // 		"NLD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Noruega
+			  // 		"NOR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Nepal
+			  // 		"NPL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Nueva Zelanda
+			  // 		"NZL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Omán
+			  // 		"OMN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Pakistán
+			  // 		"PAK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Panamá
+			  // 		"PAN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Perú
+			  // 		"PER": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Filipinas
+			  // 		"PHL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Papúa Nueva Guinea
+			  // 		"PNG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Polonia
+			  // 		"POL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Puerto Rico
+			  // 		"PRI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Corea del Norte
+			  // 		"PRK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Portugal
+			  // 		"PRT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Paraguay
+			  // 		"PRY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Qatar
+			  // 		"QAT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Rumania
+			  // 		"ROU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Rusia
+			  // 		"RUS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Ruanda
+			  // 		"RWA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Sahara
+			  // 		"ESH": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Arabia Saudita
+			  // 		"SAU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Sudán
+			  // 		"SDN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Sudán del Sur
+			  // 		"SSD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Senegal
+			  // 		"SEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Islas Salomón
+			  // 		"SLB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Sierra Leona
+			  // 		"SLE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// El Salvador
+			  // 		"SLV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Somalilandia
+			  // 		"SML": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Somalia
+			  // 		"SOM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Serbia
+			  // 		"SRB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Surinam
+			  // 		"SUR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Eslovaquia
+			  // 		"SVK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Eslovenia
+			  // 		"SVN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Suecia
+			  // 		"SWE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Suazilandia
+			  // 		"SWZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Siria
+			  // 		"SYR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Chad
+			  // 		"TCD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Togo
+			  // 		"TGO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Tailandia
+			  // 		"THA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Tayikistán
+			  // 		"TJK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Turkmenistán
+			  // 		"TKM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Timor Oriental
+			  // 		"TLS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},	
+			  // 		// Trinidad y Tobago
+			  // 		"TTO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},	
+			  // 		// Túnez
+			  // 		"TUN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},	
+			  // 		// Turquía
+			  // 		"TUR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Taiwán
+			  // 		"TWN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Tanzania
+			  // 		"TZA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Uganda
+			  // 		"UGA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Ucrania
+			  // 		"UKR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Uruguay
+			  // 		"URY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Estados Unidos
+			  // 		"USA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Uzbekistán
+			  // 		"UZB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Venezuela
+			  // 		"VEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Vietnam
+			  // 		"VNM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Vanuatu
+			  // 		"VUT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Cisjordania
+			  // 		"PSE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Yemen
+			  // 		"YEM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Sudáfrica
+			  // 		"ZAF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Zambia
+			  // 		"ZMB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Zimbabue
+			  // 		"ZWE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
+			  // 		// Falkland islands ver que hacemos FLK
+			  //  	}
 			});
 
 			//cannabisMap.labels();
