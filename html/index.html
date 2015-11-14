@@ -6,12 +6,14 @@
 		<script src="../js/datamaps.all.js"></script>
 		<script src="../js/jquery-2.1.4.min.js"></script>
 		<script src="../js/jquery-2.1.4.min.js"></script>
+		<script src="../js/jquery-2.1.4.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<link href="../css/bootstrap.css" rel="stylesheet">
 		<script>
-			function parseResponse(data) { 
+
+		function parseResponse(data) { 
 				console.log(data.data);				
 			};
-		</script>
-		<script>
 			// function getJSONP(url, success) {
 			//     var ud = '_' + +new Date,
    //      		script = document.createElement('script'),
@@ -44,17 +46,50 @@
 				    console.log("Latitude: " + position.coords.latitude); 
 				    console.log(" Longitude: " + position.coords.longitude);
 				};
+				document.getElementById("cannabisMap").onmouseover = function() {
+					console.log("ENTRO")
+					if(document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML == "Posesión: Despenalizado") {
+					 	document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML.style.color='green';
+					}
+				};
+				$("body").delegate("#possesionText","myCustomEvent",function() {
+					console.log("AHSDSADKLSAS")
+					document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML.style.color='green';
+				});
+				$("#cannabisMap").click(function() {
+  					$("#possesionText").trigger("myCustomEvent");
+				});
+				function colorLabels() {
+					if(document.getElementById("possesionText").innerHTML == "Posesión: Despenalizado") {
+					 	document.getElementById("possesionText").style.color='green';
+					}
+				};
 			});
 		</script>
 	</head>
-	<body style="height: 100%; margin-bottom: 0px; margin-top:0px">
-		<div id="cannabisMap" style="position: relative; height: 640px; width: 1000px"></div>
+	<body>
+		<div class="container-fluid">
+		    <div class="row">
+		        <div class="col-md-9">
+		        	<div id="cannabisMap" style="height: 100%">
+		        	</div>
+		        </div>
+		       	<div id="rightTable" class="col-md-3">
+		            <div>
+		            	<h1>BARRA</h1>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<!-- <div id="cannabisMap" style="position: relative; height: 640px; width: 1000px"></div> -->
 		<script>
 		 	var series = [
 		 					// Afganistán
 			 				["AFG",4.3,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Albania
 			 				["ALB",1.8,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Tierras Australes y Antárticas Francesas
+			 				["ATF",0.0],
 			 				// Argelia
 			 				["DZA",5.7,"Ilegal","Ilegal","Ilegal","Ilegal"],
 							// Angola
@@ -63,32 +98,52 @@
 			 				["ARG",7.2,"Despenalizado","Ilegal","Ilegal","Ilegal"],
 			 				// Armenia
 			 				["ARM",3.5,"Sin información","Sin información","Sin información","Sin información"],
+			 				// Antártida
+			 				["ATA",0.0],
 			 				// Australia
 			 				["AUS",10.6,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
 			 				// Austria
 			 				["AUT",3.5,"Despenalizado","Ilegal","Ilegal","Ilegal"],
-
-			 				["AZE",3.5],["BHS",5.5],["BGD",3.3],
+			 				// Azerbaiyán
+			 				["AZE",3.5,"Sin información","Sin información","Sin información","Sin información"],
+			 				// Bahamas
+			 				["BHS",5.5,"Sin información","Sin información","Sin información","Sin información"],
+			 				// Bangladesh
+			 				["BGD",3.3,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Bielorrusia
 			 				["BLR",1.1,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Burundi
+			 				["BDI",0.0],
+			 				// Bélgica
 			 				["BEL",5.1,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
+			 				// Belice
 			 				["BLZ",8.5,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				// Bolivia
 			 				["BOL",4.3,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				// Bután
+			 				["BTN",0.0],
 			 				// Botsuana
 			 				["BWA",0.0,"Despenalizado","Ilegal","Ilegal","Ilegal"],
 			 				// Bosnia y Herzegovina
 			 				["BIH",2.8,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Brasil
 			 				["BRA",2.6,"Ilegal","Ilegal","Ilegal","Despenalizado"],
-			 				["BRN",0.02],
+			 				// Benín
+			 				["BEN",0.0],
+			 				// Brunéi
+			 				["BRN",0.02,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Bulgaria
 			 				["BGR",2.5,"Ilegal","Ilegal","Ilegal","Ilegal"],
-			 				["BFA",2.9],
+			 				// Burkina Faso
+			 				["BFA",2.9,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Camboya
 			 				["KHM",3.5,"Despenalizado","Despenalizado","Despenalizado","Despenalizado"],
+			 				// República Centroafricana
+			 				["CAF",0.0],
 			 				// Canadá
 			 				["CAN",12.6,"Despenalizado","Despenalizado","Ilegal","Despenalizado"],
-			 				["TCD",0.9],
+			 				// Chad
+			 				["TCD",0.9,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Chile
 			 				["CHL",11.3,"Despenalizado","Despenalizado","Ilegal","Legal"],
 			 				// China
@@ -97,6 +152,8 @@
 			 				["COL",2.3,"Legal","Ilegal","Ilegal","Legal"],
 			 				// Costa Rica
 			 				["CRI",1.0,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
+			 				// Cuba
+			 				["CUB",0.0],
 			 				// Croacia
 			 				["HRV",5.2,"Despenalizado","Despenalizado","Ilegal","Ilegal"],
 			 				// Chipre
@@ -105,48 +162,234 @@
 			 				["CZE",15.2,"Despenalizado","Despenalizado","Despenalizado","Despenalizado"],
 			 				// Dinamarca
 			 				["DNK",5.5,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// República Dominicana
 			 				["DOM",0.3],
 							// Ecuador
 			 				["ECU",0.7,"Despenalizado","Ilegal","Ilegal","Ilegal"],
 			 				// Egipto
 			 				["EGY",6.2,"Ilegal","Ilegal","Ilegal","Ilegal"],
-			 				["SLV",0.4],["GBR",6.6],
+			 				// El Salvador
+			 				["SLV",0.4],
+			 				// Gran Bretaña
+			 				["GBR",6.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Estonia
 			 				["EST",6.0,"Despenalizado","Ilegal","Ilegal","Ilegal"],
 			 				// Etiopía
 			 				["ETH",2.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Fiji
 			 				["FJI",5.1],
 			 				// Finlandia
 			 				["FIN",3.1,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Francia
 			 				["FRA",8.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Georgia
 			 				["GEO",2.7],
 			 				// Alemania
 			 				["DEU",4.8,"Despenalizado","Despenalizado","Despenalizado","Despenalizado"],
+			 				// Ghana
 			 				["GHA",21.5],
 			 				// Grecia
 			 				["GRC",1.7,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Groenlandia
 			 				["GRL",7.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
-			 				["GTM",4.8],["GUY",2.6],
+			 				// Guatemala
+			 				["GTM",4.8],
+			 				// Guyana Francesa
+			 				["GUF",0.0],
+			 				// Guyana
+			 				["GUY",2.6],
+			 				// Haití
 			 				["HTI",1.4],
 			 				// Honduras
 			 				["HND",0.8,"Ilegal","Ilegal","Ilegal","Ilegal"],
-			 				["HUN",2.3],["ISL",3.4],["IND",3.2],["IDN",0.4],
-			 				["IRN",4.2],["IRL",6.3],["ISR",8.9],["ITA",14.6],["JAM",9.9],["JPN",0.1],
-			 				["JOR",2.1],["KAZ",4.2],["KEN",2.1],["KWT",3.1],["KGZ",6.4],["LAO",0.9],
-			 				["LVA",4.9],["LBN",1.9],["LBY",0.05],["LTU",5.6],["LUX",7.6],["MKD",0.6],
-			 				["MDG",9.1],["MYS",1.6],["MLI",7.8],["MEX",1.2],["MDA",0.9],["MNE",0.2],
-			 				["MAR",4.2],["MMR",0.9],["NAM",3.9],["NPL",3.2],["NLD",5.4],["NCL",1.9],
-			 				["NZL",14.6],["NIC",1.1],["NGA",14.3],["NOR",4.6],["OMN",0.1],["PAK",3.9],
-			 				["PAN",3.6],["PNG",29.5],["PRY",1.6],["PER",0.7],["PHL",0.8],["POL",2.7],
-			 				["PRT",3.3],["PRI",4.9],["QAT",0.1],["KOR",0.3],["ROU",0.4],["RUS",3.5],
-			 				["SAU",0.3],["SEN",2.8],["SRB",4.1],["SLE",16.1],["SVK",6.9],["SVN",4.1],
-			 				["SOM",2.5],["ZAF",4.3],["ESP",10.6],["LKA",1.5],["SUR",4.3],["SWE",1.2],
-			 				["CHE",3.4],["SYR",2.0],["TWN",0.3],["TJK",3.4],["TZA",0.2],["THA",1.2],
-			 				["TGO",1.0],["TTO",4.7],["TUR",1.9],["UGA",1.4],["UKR",2.5],["ARE",5.4],
-			 		 		["URY",6.0],["USA",13.7],["UZB",4.2],["VUT",0.1],["VEN",0.9],["VNM",0.3],
-			 				["ZMB",9.5],["ZWE",6.9]
+			 				// Hungría
+			 				["HUN",2.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Islandia
+			 				["ISL",3.4,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// India
+			 				["IND",3.2,"Despenalizado","Despenalizado","Despenalizado","Despenalizado"],
+			 				// Indonesia
+			 				["IDN",0.4,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Irán
+			 				["IRN",4.2],
+			 				// Irlanda
+			 				["IRL",6.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Israel
+			 				["ISR",8.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Italia
+			 				["ITA",14.6,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				// Irak
+			 				["IRQ",0.0],
+			 				// Jamaica
+			 				["JAM",9.9,"Despenalizado","Ilegal","Ilegal","Legal"],
+			 				// Japón
+			 				["JPN",0.1,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Jordania
+			 				["JOR",2.1,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Kazajistán
+			 				["KAZ",4.2],
+			 				// Kenia
+			 				["KEN",2.1],
+			 				// Kuwait
+			 				["KWT",3.1],
+			 				// Kirguistán
+			 				["KGZ",6.4],
+			 				// Laos
+			 				["LAO",0.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Letonia
+			 				["LVA",4.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Líbano
+			 				["LBN",1.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Libia
+			 				["LBY",0.05],
+			 				// Lituania
+			 				["LTU",5.6,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				// Luxemburgo
+			 				["LUX",7.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Macedonia
+			 				["MKD",0.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Madagascar
+			 				["MDG",9.1],
+			 				// Malasia
+			 				["MYS",1.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Malí
+			 				["MLI",7.8],
+			 				// México
+			 				["MEX",1.2,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
+			 				// Moldavia
+			 				["MDA",0.9],
+			 				// Montenegro
+			 				["MNE",0.2,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Marruecos
+			 				["MAR",4.2],
+			 				// Birmania
+			 				["MMR",0.9],
+			 				// Namibia
+			 				["NAM",3.9],
+			 				// Nepal
+			 				["NPL",3.2,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				// Holanda
+			 				["NLD",5.4,"Legal","Despenalizado","Despenalizado","Despenalizado"],
+			 				// Nueva Caledonia
+			 				["NCL",1.9],
+			 				// Nueva Zelanda
+			 				["NZL",14.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Nicaragua
+			 				["NIC",1.1],
+			 				// Nigeria
+			 				["NGA",14.3],
+			 				// Noruega
+			 				["NOR",4.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Omán
+			 				["OMN",0.1],
+			 				// Pakistán
+			 				["PAK",3.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Panamá
+			 				["PAN",3.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Papúa Nueva Guinea
+			 				["PNG",29.5],
+			 				// Corea del Norte
+			 				["PRK",0.0,"Legal","Legal","Legal","Legal"],
+			 				// Paraguay
+			 				["PRY",1.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Perú
+			 				["PER",0.7,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				// Filipinas
+			 				["PHL",0.8,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Polonia
+			 				["POL",2.7,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Portugal
+			 				["PRT",3.3,"Despenalizado","Ilegal","Despenalizado","Despenalizado"],
+			 				// Puerto Rico
+			 				["PRI",4.9,"Despenalizado","Despenalizado","Despenalizado","Despenalizado"],
+			 				// Cisjordania
+			 				["PSE",0.0],
+			 				// Qatar
+			 				["QAT",0.1],
+			 				// Corea del Sur
+			 				["KOR",0.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Rumania
+			 				["ROU",0.4,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Rusia
+			 				["RUS",3.5,"Despenalizado","Ilegal","Despenalizado","Despenalizado"],
+			 				// Arabia Saudita
+			 				["SAU",0.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Senegal
+			 				["SEN",2.8],
+			 				// Serbia
+			 				["SRB",4.1,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Sierra Leona
+			 				["SLE",16.1],
+			 				// Eslovaquia
+			 				["SVK",6.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Eslovenia
+			 				["SVN",4.1,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
+			 				// Somalia
+			 				["SOM",2.5,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Suazilandia
+			 				["SWZ",0.0],
+			 				// Sudáfrica
+			 				["ZAF",4.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// España
+			 				["ESP",10.6,"Legal","Ilegal","Despenalizado","Legal"],
+			 				// Sri Lanka
+			 				["LKA",1.5,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Somalilandia
+			 				["SML",0.0],
+			 				// Islas Salomón
+			 				["SLB",0.0],
+			 				// Surinam
+			 				["SUR",4.3],
+			 				// Suecia
+			 				["SWE",1.2,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Suiza
+			 				["CHE",3.4,"Despenalizado","Ilegal","Ilegal","Ilegal"],
+			 				// Siria
+			 				["SYR",2.0,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Taiwán
+			 				["TWN",0.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Tayikistán
+			 				["TJK",3.4],
+			 				// Turkmenistán
+			 				["TKM",0.0],
+			 				// Timor Oriental
+			 				["TLS",0.0],
+			 				// Tanzania
+			 				["TZA",0.2],
+			 				// Tailandia
+			 				["THA",1.2,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Togo
+			 				["TGO",1.0],
+			 				// Trinidad y Tobago
+			 				["TTO",4.7],
+			 				// Túnez
+			 				["TUN",0.0,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Turquía
+			 				["TUR",1.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 				// Uganda
+			 				["UGA",1.4],
+			 				// Ucrania
+			 				["UKR",2.5,"Despenalizado","Ilegal","Despenalizado","Despenalizado"],
+			 				// Emiratos Árabes Unidos
+			 				["ARE",5.4,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 		 		// Uruguay
+			 		 		["URY",6.0,"Legal","Legal","Legal","Legal"],
+			 		 		// Estados Unidos
+			 		 		["USA",13.7,"Despenalizado","Despenalizado","Despenalizado","Despenalizado"],
+			 		 		// Uzbekistán
+			 		 		["UZB",4.2,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 		 		// Vanuatu
+			 		 		["VUT",0.1],
+			 		 		// Venezuela
+			 		 		["VEN",0.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 		 		// Vietnam
+			 		 		["VNM",0.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
+			 		 		// Yemen
+			 		 		["YEM",0.0],
+			 				// Zambia
+			 				["ZMB",9.5],
+			 				// Zimbabue
+			 				["ZWE",6.9,"Ilegal","Ilegal","Ilegal","Ilegal"]
 			 			];
 
 			var dataset = {};
@@ -175,7 +418,7 @@
 			  	geographyConfig: {
 			  		highlightBorderColor: '#000000',
 			   		popupTemplate: function(geography, data) {
-			      		return '<div class="hoverinfo">' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold;margin-bottom: 0px; margin-top: 0px; text-align: center">'  + geography.properties.name + '</p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Posesión: ' +  data.possesion + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Venta: ' +  data.sale + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Transporte: ' +  data.transport + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Cultivación: ' +  data.cultivation + ' </p>'
+			      		return '<div class="hoverinfo">' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold;margin-bottom: 0px; margin-top: 0px; text-align: center">'  + geography.properties.name + '</p>' + '<p id="possesionText" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Posesión: ' +  data.possesion + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Venta: ' +  data.sale + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Transporte: ' +  data.transport + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Cultivación: ' +  data.cultivation + ' </p>'
 			    	},
 			    	highlightFillColor: function(geo) {
 		            	return geo['fillColor'];
@@ -184,38 +427,6 @@
 			  	},
 			  	data: dataset,
 			  // 	data: {
-			  // 		// Emiratos Árabes Unidos
-			  // 		"ARE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Antártida
-			  // 		"ATA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Tierras Australes y Antárticas Francesas
-			  // 		"ATF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Azerbaiyán
-			  // 		"AZE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Burundi
-			  // 		"BDI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Bélgica
-			  // 		"BEL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Benín
-			  // 		"BEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Burkina Faso
-			  // 		"BFA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Bangladesh
-			  // 		"BGD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Bahamas
-			  // 		"BHS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Belice
-			  // 		"BLZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Bolivia
-			  // 		"BOL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Brunéi
-			  // 		"BRN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Bután
-			  // 		"BTN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// República Centroafricana
-			  // 		"CAF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Suiza
-			  // 		"CHE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Costa de Marfil
 			  // 		"CIV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Camerún
@@ -224,30 +435,14 @@
 			  // 		"COD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// República del Congo
 			  // 		"COG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Cuba
-			  // 		"CUB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  //        // República Turca del Norte de Chipre
 			  // 		"CNP": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Yibuti
 			  // 		"DJI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// República Dominicana
-			  // 		"DOM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Eritrea
 			  // 		"ERI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// España
-			  // 		"ESP": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Fiji
-			  // 		"FJI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Guyana Francesa
-			  // 		"GUF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Gabón
 			  // 		"GAB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Gran Bretaña
-			  // 		"GBR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Georgia
-			  // 		"GEO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Ghana
-			  // 		"GHA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Guinea
 			  // 		"GIN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Gambia
@@ -256,82 +451,12 @@
 			  // 		"GNB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Guinea Ecuatorial
 			  // 		"GNQ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Guatemala
-			  // 		"GTM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Guyana
-			  // 		"GUY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Haití
-			  // 		"HTI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Hungría
-			  // 		"HUN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Indonesia
-			  // 		"IDN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// India
-			  // 		"IND": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Irlanda
-			  // 		"IRL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Irán
-			  // 		"IRN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Irak
-			  // 		"IRQ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Islandia
-			  // 		"ISL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Israel
-			  // 		"ISR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Italia
-			  // 		"ITA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Jamaica
-			  // 		"JAM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Jordania
-			  // 		"JOR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Japón
-			  // 		"JPN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Kazajistán
-			  // 		"KAZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Kenia
-			  // 		"KEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Kirguistán
-			  // 		"KGZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Corea del Sur
-			  // 		"KOR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Kosovo
 			  // 		"KSV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Kuwait
-			  // 		"KWT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Laos
-			  // 		"LAO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Líbano
-			  // 		"LBN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Liberia
 			  // 		"LBR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Libia
-			  // 		"LBY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Sri Lanka
-			  // 		"LKA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Lesoto
 			  // 		"LSO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Lituania
-			  // 		"LTU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Luxemburgo
-			  // 		"LUX": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Letonia
-			  // 		"LVA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Marruecos
-			  // 		"MAR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Moldavia
-			  // 		"MDA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Madagascar
-			  // 		"MDG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// México
-			  // 		"MEX": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Macedonia
-			  // 		"MKD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Malí
-			  // 		"MLI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Birmania
-			  // 		"MMR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Montenegro
-			  // 		"MNE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Mongolia
 			  // 		"MNG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Mozambique
@@ -340,156 +465,22 @@
 			  // 		"MRT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Malaui
 			  // 		"MWI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Malasia
-			  // 		"MYS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Namibia
-			  // 		"NAM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Nueva Caledonia
-			  // 		"NCL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Níger
 			  // 		"NER": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Nigeria
-			  // 		"NGA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Nicaragua
-			  // 		"NIC": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Holanda
-			  // 		"NLD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Noruega
-			  // 		"NOR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Nepal
-			  // 		"NPL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Nueva Zelanda
-			  // 		"NZL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Omán
-			  // 		"OMN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Pakistán
-			  // 		"PAK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Panamá
-			  // 		"PAN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Perú
-			  // 		"PER": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Filipinas
-			  // 		"PHL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Papúa Nueva Guinea
-			  // 		"PNG": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Polonia
-			  // 		"POL": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Puerto Rico
-			  // 		"PRI": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Corea del Norte
-			  // 		"PRK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Portugal
-			  // 		"PRT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Paraguay
-			  // 		"PRY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Qatar
-			  // 		"QAT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Rumania
-			  // 		"ROU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Rusia
-			  // 		"RUS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Ruanda
 			  // 		"RWA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Sahara
 			  // 		"ESH": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Arabia Saudita
-			  // 		"SAU": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Sudán
 			  // 		"SDN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Sudán del Sur
 			  // 		"SSD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Senegal
-			  // 		"SEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Islas Salomón
-			  // 		"SLB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Sierra Leona
-			  // 		"SLE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// El Salvador
-			  // 		"SLV": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Somalilandia
-			  // 		"SML": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Somalia
-			  // 		"SOM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Serbia
-			  // 		"SRB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Surinam
-			  // 		"SUR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Eslovaquia
-			  // 		"SVK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Eslovenia
-			  // 		"SVN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Suecia
-			  // 		"SWE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Suazilandia
-			  // 		"SWZ": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Siria
-			  // 		"SYR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Chad
-			  // 		"TCD": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Togo
-			  // 		"TGO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Tailandia
-			  // 		"THA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Tayikistán
-			  // 		"TJK": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Turkmenistán
-			  // 		"TKM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Timor Oriental
-			  // 		"TLS": { "fillKey": "authorHasTraveledTo" , "legal": "No"},	
-			  // 		// Trinidad y Tobago
-			  // 		"TTO": { "fillKey": "authorHasTraveledTo" , "legal": "No"},	
-			  // 		// Túnez
-			  // 		"TUN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},	
-			  // 		// Turquía
-			  // 		"TUR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Taiwán
-			  // 		"TWN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Tanzania
-			  // 		"TZA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Uganda
-			  // 		"UGA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Ucrania
-			  // 		"UKR": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Uruguay
-			  // 		"URY": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Estados Unidos
-			  // 		"USA": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Uzbekistán
-			  // 		"UZB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Venezuela
-			  // 		"VEN": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Vietnam
-			  // 		"VNM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Vanuatu
-			  // 		"VUT": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Cisjordania
-			  // 		"PSE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Yemen
-			  // 		"YEM": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Sudáfrica
-			  // 		"ZAF": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Zambia
-			  // 		"ZMB": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
-			  // 		// Zimbabue
-			  // 		"ZWE": { "fillKey": "authorHasTraveledTo" , "legal": "No"},
 			  // 		// Falkland islands ver que hacemos FLK
 			  //  	}
 			});
 
 			//cannabisMap.labels();
 			var colors = d3.scale.category10();
-
-			// window.setInterval(function() {
-			// 	cannabisMap.updateChoropleth({
-			// 		USA: colors(Math.random() * 10),
-			// 		RUS: colors(Math.random() * 100),
-			// 		AUS: { fillKey: 'authorHasTraveledTo'},
-			// 		BRA: colors(Math.random() * 50),
-			// 		CAN: colors(Math.random() * 50),
-			// 		ZAF: colors(Math.random() * 50),
-			// 		IND: colors(Math.random() * 50),
-			// 	});
-			// }, 2000);
 		</script>
 	</body>
 </html>
