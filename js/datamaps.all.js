@@ -708,6 +708,9 @@
                     ],
                     [
                         [25, 26, 27, 28, 29, 30]
+                    ],
+                    [
+                        [276]
                     ]
                 ]
             }, {
@@ -1303,15 +1306,6 @@
                     [
                         [275, -275]
                     ]
-                ]
-            }, {
-                "type": "Polygon",
-                "properties": {
-                    "name": "Falkland Islands"
-                },
-                "id": "FLK",
-                "arcs": [
-                    [276]
                 ]
             }, {
                 "type": "MultiPolygon",

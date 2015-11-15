@@ -11,9 +11,9 @@
 		<link href="../css/bootstrap.css" rel="stylesheet">
 		<script>
 
-		function parseResponse(data) { 
-				console.log(data.data);				
-			};
+		// function parseResponse(data) { 
+		// 		console.log(data.data);				
+		// 	};
 			// function getJSONP(url, success) {
 			//     var ud = '_' + +new Date,
    //      		script = document.createElement('script'),
@@ -41,42 +41,42 @@
 		
 		<script>
 			$(document).ready(function() {
-				navigator.geolocation.getCurrentPosition(showPosition);
-				function showPosition(position){
-				    console.log("Latitude: " + position.coords.latitude); 
-				    console.log(" Longitude: " + position.coords.longitude);
-				};
-				document.getElementById("cannabisMap").onmouseover = function() {
-					console.log("ENTRO")
-					if(document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML == "Posesión: Despenalizado") {
-					 	document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML.style.color='green';
-					}
-				};
-				$("body").delegate("#possesionText","myCustomEvent",function() {
-					console.log("AHSDSADKLSAS")
-					document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML.style.color='green';
-				});
-				$("#cannabisMap").click(function() {
-  					$("#possesionText").trigger("myCustomEvent");
-				});
-				function colorLabels() {
-					if(document.getElementById("possesionText").innerHTML == "Posesión: Despenalizado") {
-					 	document.getElementById("possesionText").style.color='green';
-					}
-				};
+				// navigator.geolocation.getCurrentPosition(showPosition);
+				// function showPosition(position){
+				    // console.log("Latitude: " + position.coords.latitude); 
+				    // console.log(" Longitude: " + position.coords.longitude);
+				// };
+				// document.getElementById("cannabisMap").onmouseover = function() {
+				// 	if(document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML == "Posesión: Despenalizado") {
+				// 	 	document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML.style.color='green';
+				// 	}
+				// };
+				// $("body").delegate("#possesionText","myCustomEvent",function() {
+				// 	console.log("AHSDSADKLSAS")
+				// 	document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML.style.color='green';
+				// });
+				// $("#cannabisMap").click(function() {
+  		// 			$("#possesionText").trigger("myCustomEvent");
+				// });
+				// function colorLabels() {
+				// 	if(document.getElementById("possesionText").innerHTML == "Posesión: Despenalizado") {
+				// 	 	document.getElementById("possesionText").style.color='green';
+				// 	}
+				// };
 			});
 		</script>
 	</head>
 	<body>
-		<div class="container-fluid">
+		<div class="container-fluid" style="height: 100%">
+			<h1 style="margin-bottom: 0px; text-align: center; margin-top: 0px;">Consumo anual de cannabis en el mundo</h1>
 		    <div class="row">
-		        <div class="col-md-9">
-		        	<div id="cannabisMap" style="height: 100%">
+		        <div class="col-md-9" style="heigth: 100%">
+		        	<div id="cannabisMap" style="height: 95%; margin-bottom: 0px">
 		        	</div>
 		        </div>
 		       	<div id="rightTable" class="col-md-3">
 		            <div>
-		            	<h1>BARRA</h1>
+		            	<h4 style="text-align: center">Cepas</h1>
 		            </div>
 		        </div>
 		    </div>
@@ -89,7 +89,7 @@
 			 				// Albania
 			 				["ALB",1.8,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Tierras Australes y Antárticas Francesas
-			 				["ATF",0.0],
+			 				["ATF",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Argelia
 			 				["DZA",5.7,"Ilegal","Ilegal","Ilegal","Ilegal"],
 							// Angola
@@ -99,7 +99,7 @@
 			 				// Armenia
 			 				["ARM",3.5,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Antártida
-			 				["ATA",0.0],
+			 				["ATA",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Australia
 			 				["AUS",10.6,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
 			 				// Austria
@@ -113,7 +113,7 @@
 			 				// Bielorrusia
 			 				["BLR",1.1,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Burundi
-			 				["BDI",0.0],
+			 				["BDI",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Bélgica
 			 				["BEL",5.1,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
 			 				// Belice
@@ -121,7 +121,7 @@
 			 				// Bolivia
 			 				["BOL",4.3,"Despenalizado","Ilegal","Ilegal","Ilegal"],
 			 				// Bután
-			 				["BTN",0.0],
+			 				["BTN",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Botsuana
 			 				["BWA",0.0,"Despenalizado","Ilegal","Ilegal","Ilegal"],
 			 				// Bosnia y Herzegovina
@@ -129,7 +129,7 @@
 			 				// Brasil
 			 				["BRA",2.6,"Ilegal","Ilegal","Ilegal","Despenalizado"],
 			 				// Benín
-			 				["BEN",0.0],
+			 				["BEN",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Brunéi
 			 				["BRN",0.02,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Bulgaria
@@ -139,11 +139,11 @@
 			 				// Camboya
 			 				["KHM",3.5,"Despenalizado","Despenalizado","Despenalizado","Despenalizado"],
 			 				// República Centroafricana
-			 				["CAF",0.0],
+			 				["CAF",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Canadá
 			 				["CAN",12.6,"Despenalizado","Despenalizado","Ilegal","Despenalizado"],
 			 				// Camerún
-			 				["CMR",0.0],
+			 				["CMR",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Chad
 			 				["TCD",0.9,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Chile
@@ -155,29 +155,29 @@
 			 				// Costa Rica
 			 				["CRI",1.0,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
 			 				// Cuba
-			 				["CUB",0.0],
+			 				["CUB",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Croacia
 			 				["HRV",5.2,"Despenalizado","Despenalizado","Ilegal","Ilegal"],
 			 				// Chipre
 			 				["CYP",4.4,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
 			 				// Costa de Marfil
-			 				["CIV",0.0],
+			 				["CIV",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// República Checa
 			 				["CZE",15.2,"Despenalizado","Despenalizado","Despenalizado","Despenalizado"],
 			 				// Dinamarca
 			 				["DNK",5.5,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// República Dominicana
-			 				["DOM",0.3],
+			 				["DOM",0.3,"Sin información","Sin información","Sin información","Sin información"],
 							// Ecuador
 			 				["ECU",0.7,"Despenalizado","Ilegal","Ilegal","Ilegal"],
 			 				// Egipto
 			 				["EGY",6.2,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// El Salvador
-			 				["SLV",0.4],
+			 				["SLV",0.4,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Eritrea
-			 				["ERI",0.0],
+			 				["ERI",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Gabón
-			 				["GAB",0.0],
+			 				["GAB",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Gran Bretaña
 			 				["GBR",6.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Estonia
@@ -185,37 +185,37 @@
 			 				// Etiopía
 			 				["ETH",2.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Fiji
-			 				["FJI",5.1],
+			 				["FJI",5.1,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Finlandia
 			 				["FIN",3.1,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Francia
 			 				["FRA",8.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Georgia
-			 				["GEO",2.7],
+			 				["GEO",2.7,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Alemania
 			 				["DEU",4.8,"Despenalizado","Despenalizado","Despenalizado","Despenalizado"],
 			 				// Gambia
-			 				["GMB",0.0],
+			 				["GMB",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Ghana
-			 				["GHA",21.5],
+			 				["GHA",21.5,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Grecia
 			 				["GRC",1.7,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Groenlandia
 			 				["GRL",7.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Guatemala
-			 				["GTM",4.8],
+			 				["GTM",4.8,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Guinea
-			 				["GIN",0.0],
+			 				["GIN",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Guinea-Bisáu
-			 				["GNB",0.0],
+			 				["GNB",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Guinea Ecuatorial
-			 				["GNQ",0.0],
+			 				["GNQ",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Guyana Francesa
-			 				["GUF",0.0],
+			 				["GUF",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Guyana
-			 				["GUY",2.6],
+			 				["GUY",2.6,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Haití
-			 				["HTI",1.4],
+			 				["HTI",1.4,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Honduras
 			 				["HND",0.8,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Hungría
@@ -227,7 +227,7 @@
 			 				// Indonesia
 			 				["IDN",0.4,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Irán
-			 				["IRN",4.2],
+			 				["IRN",4.2,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Irlanda
 			 				["IRL",6.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Israel
@@ -235,7 +235,7 @@
 			 				// Italia
 			 				["ITA",14.6,"Despenalizado","Ilegal","Ilegal","Ilegal"],
 			 				// Irak
-			 				["IRQ",0.0],
+			 				["IRQ",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Jamaica
 			 				["JAM",9.9,"Despenalizado","Ilegal","Ilegal","Legal"],
 			 				// Japón
@@ -243,27 +243,27 @@
 			 				// Jordania
 			 				["JOR",2.1,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Kazajistán
-			 				["KAZ",4.2],
+			 				["KAZ",4.2,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Kenia
-			 				["KEN",2.1],
+			 				["KEN",2.1,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Kosovo
-			 				["KSV",0.0],
+			 				["KSV",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Kuwait
-			 				["KWT",3.1],
+			 				["KWT",3.1,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Kirguistán
-			 				["KGZ",6.4],
+			 				["KGZ",6.4,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Laos
 			 				["LAO",0.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Lesoto
-			 				["LSO",0.0],
+			 				["LSO",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Letonia
 			 				["LVA",4.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Líbano
 			 				["LBN",1.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Libia
-			 				["LBY",0.05],
+			 				["LBY",0.05,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Liberia
-			 				["LBR",0.0],
+			 				["LBR",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Lituania
 			 				["LTU",5.6,"Despenalizado","Ilegal","Ilegal","Ilegal"],
 			 				// Luxemburgo
@@ -271,55 +271,55 @@
 			 				// Macedonia
 			 				["MKD",0.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Madagascar
-			 				["MDG",9.1],
+			 				["MDG",9.1,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Malasia
 			 				["MYS",1.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Malaui
-			 				["MWI",0.0],
+			 				["MWI",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Malí
-			 				["MLI",7.8],
+			 				["MLI",7.8,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Mauritania
-			 				["MRT",0.0],
+			 				["MRT",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// México
 			 				["MEX",1.2,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
 			 				// Moldavia
-			 				["MDA",0.9],
+			 				["MDA",0.9,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Mongolia
-			 				["MNG",0.0],
+			 				["MNG",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Montenegro
 			 				["MNE",0.2,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Mozambique
-			 				["MOZ",0.0],
+			 				["MOZ",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Marruecos
-			 				["MAR",4.2],
+			 				["MAR",4.2,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Birmania
-			 				["MMR",0.9],
+			 				["MMR",0.9,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Namibia
-			 				["NAM",3.9],
+			 				["NAM",3.9,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Nepal
 			 				["NPL",3.2,"Despenalizado","Ilegal","Ilegal","Ilegal"],
 			 				// Níger
-			 				["NER",0.0],
+			 				["NER",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Holanda
 			 				["NLD",5.4,"Legal","Despenalizado","Despenalizado","Despenalizado"],
 			 				// Nueva Caledonia
-			 				["NCL",1.9],
+			 				["NCL",1.9,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Nueva Zelanda
 			 				["NZL",14.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Nicaragua
-			 				["NIC",1.1],
+			 				["NIC",1.1,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Nigeria
-			 				["NGA",14.3],
+			 				["NGA",14.3,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Noruega
 			 				["NOR",4.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Omán
-			 				["OMN",0.1],
+			 				["OMN",0.1,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Pakistán
 			 				["PAK",3.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Panamá
 			 				["PAN",3.6,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Papúa Nueva Guinea
-			 				["PNG",29.5],
+			 				["PNG",29.5,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Corea del Norte
 			 				["PRK",0.0,"Legal","Legal","Legal","Legal"],
 			 				// Paraguay
@@ -335,19 +335,19 @@
 			 				// Puerto Rico
 			 				["PRI",4.9,"Despenalizado","Despenalizado","Despenalizado","Despenalizado"],
 			 				// Cisjordania
-			 				["PSE",0.0],
+			 				["PSE",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Qatar
-			 				["QAT",0.1],
+			 				["QAT",0.1,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Corea del Sur
 			 				["KOR",0.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// República Democrática del Congo
-			 				["COD",0.0],
+			 				["COD",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// República del Congo
-			 				["COG",0.0],
+			 				["COG",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// República Turca del Norte de Chipre
-			 				["CNP",0.0],
+			 				["CNP",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Ruanda
-			 				["RWA",0.0],
+			 				["RWA",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Rumania
 			 				["ROU",0.4,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Rusia
@@ -355,25 +355,25 @@
 			 				// Arabia Saudita
 			 				["SAU",0.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Senegal
-			 				["SEN",2.8],
+			 				["SEN",2.8,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Serbia
 			 				["SRB",4.1,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Sierra Leona
-			 				["SLE",16.1],
+			 				["SLE",16.1,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Sudán
-			 				["SDN",0.0],
+			 				["SDN",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Sudán del Sur
-			 				["SSD",0.0],
+			 				["SSD",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Eslovaquia
 			 				["SVK",6.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Eslovenia
 			 				["SVN",4.1,"Despenalizado","Ilegal","Ilegal","Despenalizado"],
 			 				// Sahara
-			 				["ESH",0.0],
+			 				["ESH",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Somalia
 			 				["SOM",2.5,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Suazilandia
-			 				["SWZ",0.0],
+			 				["SWZ",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Sudáfrica
 			 				["ZAF",4.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// España
@@ -381,11 +381,11 @@
 			 				// Sri Lanka
 			 				["LKA",1.5,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Somalilandia
-			 				["SML",0.0],
+			 				["SML",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Islas Salomón
-			 				["SLB",0.0],
+			 				["SLB",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Surinam
-			 				["SUR",4.3],
+			 				["SUR",4.3,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Suecia
 			 				["SWE",1.2,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Suiza
@@ -395,25 +395,25 @@
 			 				// Taiwán
 			 				["TWN",0.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Tayikistán
-			 				["TJK",3.4],
+			 				["TJK",3.4,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Turkmenistán
-			 				["TKM",0.0],
+			 				["TKM",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Timor Oriental
-			 				["TLS",0.0],
+			 				["TLS",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Tanzania
-			 				["TZA",0.2],
+			 				["TZA",0.2,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Tailandia
 			 				["THA",1.2,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Togo
-			 				["TGO",1.0],
+			 				["TGO",1.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Trinidad y Tobago
-			 				["TTO",4.7],
+			 				["TTO",4.7,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Túnez
 			 				["TUN",0.0,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Turquía
 			 				["TUR",1.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 				// Uganda
-			 				["UGA",1.4],
+			 				["UGA",1.4,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Ucrania
 			 				["UKR",2.5,"Despenalizado","Ilegal","Despenalizado","Despenalizado"],
 			 				// Emiratos Árabes Unidos
@@ -425,26 +425,30 @@
 			 		 		// Uzbekistán
 			 		 		["UZB",4.2,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 		 		// Vanuatu
-			 		 		["VUT",0.1],
+			 		 		["VUT",0.1,"Sin información","Sin información","Sin información","Sin información"],
 			 		 		// Venezuela
 			 		 		["VEN",0.9,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 		 		// Vietnam
 			 		 		["VNM",0.3,"Ilegal","Ilegal","Ilegal","Ilegal"],
 			 		 		// Yemen
-			 		 		["YEM",0.0],
+			 		 		["YEM",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 		 		// Yibuti
-			 		 		["DJI",0.0],
+			 		 		["DJI",0.0,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Zambia
-			 				["ZMB",9.5],
+			 				["ZMB",9.5,"Sin información","Sin información","Sin información","Sin información"],
 			 				// Zimbabue
 			 				["ZWE",6.9,"Ilegal","Ilegal","Ilegal","Ilegal"]
 			 			];
 
 			var dataset = {};
-			var onlyValues = series.map(function(obj){ return obj[1]; });
-    		var minValue = Math.min.apply(null, onlyValues), maxValue = Math.max.apply(null, onlyValues);
+			var onlyValues = series.map(function(obj) { if(obj[1] != 0) { return obj[1]; } else return 4.6 });
+    		var minValue = Math.min.apply(null, onlyValues);
+    		var maxValue = Math.max.apply(null, onlyValues);
 
-    		var paletteScale = d3.scale.linear().domain([minValue,maxValue]).range(["#EFEFFF","#02386F"]); 
+    		console.log(Math.min.apply(null, onlyValues));
+    		console.log(Math.max.apply(null, onlyValues));
+
+    		var paletteScale = d3.scale.linear().domain([minValue,maxValue]).range(["greenyellow","green"]); 
 
     		series.forEach(function(item) { 
 				var iso = item[0],
@@ -453,20 +457,48 @@
 				sale = item[3];
 				transport = item[4];
 				cultivation = item[5];
-				dataset[iso] = { numberOfThings: value, fillColor: paletteScale(value), possesion, sale, transport, cultivation};
+				dataset[iso] = { numberOfThings: value, fillColor: getColor(value), possesion, sale, transport, cultivation};
 			});
+
+			function getColor(value) {
+				if(value != 0) {
+					return paletteScale(value);
+				} else {
+					return 'gray';
+				}
+			}
+
+			function getValue(value) {
+				if(value != 0) {
+					return value + '%';
+				} else {
+					return "Sin información";
+				}
+			}
+
+			function getColorValue(value) {
+				if(value == 'Despenalizado') {
+					return '<span style="color: yellow">' + value + '</span>';
+				} else if(value == 'Legal') {
+					return '<span style="color: green">' + value + '</span>';;
+				} else if(value == 'Ilegal') {
+					return '<span style="color: red">' + value + '</span>';;
+				} else {
+					return '<span>' + value + '</span>';;
+				}
+			}
 
 			var cannabisMap = new Datamap({
 				element: document.getElementById("cannabisMap"),
 			  	projection: 'mercator',
 			  	fills: {
 			    	'authorHasTraveledTo': '#fa0fa0',
-			    	defaultFill: 'gray'
+			    	defaultFill: 'yellow'
 			  	},
 			  	geographyConfig: {
 			  		highlightBorderColor: '#000000',
 			   		popupTemplate: function(geography, data) {
-			      		return '<div class="hoverinfo">' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold;margin-bottom: 0px; margin-top: 0px; text-align: center">'  + geography.properties.name + '</p>' + '<p id="possesionText" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Posesión: ' +  data.possesion + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Venta: ' +  data.sale + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Transporte: ' +  data.transport + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Cultivación: ' +  data.cultivation + ' </p>'
+			      		return '<div class="hoverinfo">' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: bold;margin-bottom: 0px; margin-top: 0px; text-align: center">'  + geography.properties.name + '</p>' + '<p id="possesionText" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Posesión: ' +  getColorValue(data.possesion) + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Venta: ' +  getColorValue(data.sale) + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Transporte: ' +  getColorValue(data.transport) + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Cultivación: ' +  getColorValue(data.cultivation) + ' </p>' + '<p style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: 10px; margin-bottom: 0px; margin-top: 0px; text-align: left">Prevalencia anual: ' + getValue(data.numberOfThings) + '</p>'
 			    	},
 			    	highlightFillColor: function(geo) {
 		            	return geo['fillColor'];
@@ -474,7 +506,6 @@
 			    	highlightBorderWidth: 2
 			  	},
 			  	data: dataset,
-			  // 		// Falkland islands ver que hacemos FLK
 			});
 
 			//cannabisMap.labels();
