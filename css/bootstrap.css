@@ -5,6 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -6797,5 +6798,18 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+
+/* CUSTOM */
+.colorbar .axis line{
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.colorbar .axis .domain{
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
 }
 /*# sourceMappingURL=bootstrap.css.map */

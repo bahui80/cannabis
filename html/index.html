@@ -8,6 +8,7 @@
 		<script src="../js/jquery-2.1.4.min.js"></script>
 		<script src="../js/jquery-2.1.4.min.js"></script>
 		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/colorbar.js"></script>
 		<link href="../css/bootstrap.css" rel="stylesheet">
 		<script>
 
@@ -46,10 +47,6 @@
 				    // console.log("Latitude: " + position.coords.latitude); 
 				    // console.log(" Longitude: " + position.coords.longitude);
 				// };
-				// document.getElementById("cannabisMap").onmouseover = function() {
-				// 	if(document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML == "Posesión: Despenalizado") {
-				// 	 	document.getElementById("cannabisMap").children[1].children[0].children[1].innerHTML.style.color='green';
-				// 	}
 				// };
 				// $("body").delegate("#possesionText","myCustomEvent",function() {
 				// 	console.log("AHSDSADKLSAS")
@@ -76,7 +73,21 @@
 		        </div>
 		       	<div id="rightTable" class="col-md-3">
 		            <div>
-		            	<h4 style="text-align: center">Cepas</h1>
+		            	<h4 id="cepasTitle" style="text-align: center">Cepas</h4>
+		            	<div class="panel panel-default">
+							<!-- Default panel contents -->
+						  	<div id="countryLabel" class="panel-heading">País: </div>
+
+						 	<!-- Table -->
+							<table class="table">
+								<thead>
+						        	<tr>
+							        	<th>Nombre</th>
+							        	<th>Imagen</th>
+							        </tr>
+						    	</thead>
+							</table>
+						</div>
 		            </div>
 		        </div>
 		    </div>
@@ -445,9 +456,6 @@
     		var minValue = Math.min.apply(null, onlyValues);
     		var maxValue = Math.max.apply(null, onlyValues);
 
-    		console.log(Math.min.apply(null, onlyValues));
-    		console.log(Math.max.apply(null, onlyValues));
-
     		var paletteScale = d3.scale.linear().domain([minValue,maxValue]).range(["greenyellow","green"]); 
 
     		series.forEach(function(item) { 
@@ -478,7 +486,7 @@
 
 			function getColorValue(value) {
 				if(value == 'Despenalizado') {
-					return '<span style="color: yellow">' + value + '</span>';
+					return '<span style="color: #C3C306">' + value + '</span>';
 				} else if(value == 'Legal') {
 					return '<span style="color: green">' + value + '</span>';;
 				} else if(value == 'Ilegal') {
@@ -508,8 +516,18 @@
 			  	data: dataset,
 			});
 
-			//cannabisMap.labels();
-			var colors = d3.scale.category10();
+			document.getElementsByClassName("RUS")[0].onmouseover = function() {
+				$($("#countryLabel")[0]).text("País: Rusia");
+			}
+
+
+			var svg = d3.select(".datamaps-subunits").append("svg").attr("width", 1000).attr("height", 1000);
+			var g = svg.append("g").attr("transform","translate(780,30)").classed("colorbar",true);
+			var cb = colorBar().color(d3.scale.linear().domain([minValue,maxValue]).range(["green","greenyellow"])).size(150).lineWidth(20).precision(4);
+			g.call(cb);
+			// $(".colorbar").append('<g class="axis" transform="translate(0,10)"><g class="tick major" transform="translate(22.896879240162832,0)" style="opacity: 1;"><text y="23" x="0" dy=".71em" style="text-anchor: middle;">' + minValue + '</text></g><path class="domain" d="M0,20V0H150V20"></path></g>');
+			
+			 
 		</script>
 	</body>
 </html>
