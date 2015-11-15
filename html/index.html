@@ -520,6 +520,10 @@
 				$($("#countryLabel")[0]).text("País: Rusia");
 			}
 
+			document.getElementsByClassName("RUS")[0].onmouseout = function() {
+				$($("#countryLabel")[0]).text("País: ");
+			}
+
 
 			var svg = d3.select(".datamaps-subunits").append("svg").attr("width", 1000).attr("height", 1000);
 			var g = svg.append("g").attr("transform","translate(780,30)").classed("colorbar",true);
