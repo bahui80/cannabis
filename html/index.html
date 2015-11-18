@@ -851,17 +851,14 @@
 				$($("#strainsTableBody")[0]).find('tr').remove();
 				$($("#strainsTableBody")[0]).append('<tr><td style="vertical-align: middle;">Kariba Surprise</td><td><img src="https://www.smokereports.com/images/strains/landraces/full-kariba-surprise.png" style="width: 60px; height: 60px"></td></tr>');	
 			}
-
-			// document.getElementsByClassName("RUS")[0].onmouseout = function() {
-			// 	$($("#countryLabel")[0]).text("País: ");
-			// }
-
-
 			var svg = d3.select(".datamaps-subunits").append("svg").attr("width", "100%").attr("height", "100%");
 			var g = svg.append("g").attr("transform","translate(780,30)").classed("colorbar",true);
 			var cb = colorBar().color(d3.scale.linear().domain([minValue,maxValue]).range(["green","greenyellow"])).size(150).lineWidth(20).precision(4);
 			g.call(cb);
-			// $(".colorbar").append('<g class="axis" transform="translate(0,10)"><g class="tick major" transform="translate(22.896879240162832,0)" style="opacity: 1;"><text y="23" x="0" dy=".71em" style="text-anchor: middle;">' + minValue + '</text></g><path class="domain" d="M0,20V0H150V20"></path></g>');		 
+			var colorbar = document.getElementsByClassName("colorbar")[0];
+			var content = '<g transform="translate(0,10)" style="font-size: 12px"><g class="tick major" transform="translate(22.896879240162832,0)" style="opacity: 1;"><text y="6" x="-20" dy=".71em" style="text-anchor: middle;">' + minValue + '</text><text y="6" x="120" dy=".71em" style="text-anchor: middle;">' + maxValue + '</text></g></g>';
+			colorbar.innerHTML = colorbar.innerHTML + content;
+			$(".axis").remove();
 		</script>
 	</body>
 </html>
